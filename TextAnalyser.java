@@ -1,6 +1,6 @@
 package Assignment.TextAnalyser;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class TextAnalyser {
 	
@@ -11,31 +11,23 @@ public class TextAnalyser {
 	}
 	
 	public void analyse(String input, Options options) {
-		HashMap<Character,Integer> map = inputToHashmap(input, options);
+		LinkedHashMap<Character,Integer> map = inputToHashmap(input, options);
 		
-		System.out.println(map);
-		
-		buildGraph(map, input);
+		buildGraph(map, removeDuplicates(input));
 	}
 	
-	private void buildGraph(HashMap<Character,Integer> map, String input) {
-		
-		for (int j = 0; j < input.length(); j++) { 
-			if (input.charAt(j) == (' ')) { //skip spaces
-				j++;
-			} else if (map.get(input.charAt(j)) != null) {
-				System.out.print(input.charAt(j) + " | ");
-				for (int i = 0; i < map.get(input.charAt(j)); i++) { //prints x (value of letter in HashMap) times
-					System.out.print("x");
+	private void buildGraph(LinkedHashMap<Character,Integer> map, String input) {
+			for (int j = 0; j <input.length(); j++) { //for each letter in string
+				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
+					System.out.print(input.charAt(j) + " | ");
+					System.out.print(map.get(input.charAt(j)));
+					System.out.println();
 				}
-				System.out.println();
-			}
 		}
-				
 	}
 	
-	private HashMap<Character,Integer> inputToHashmap(String input, Options options) {
-		HashMap<Character, Integer> map = new HashMap<>();
+	private LinkedHashMap<Character,Integer> inputToHashmap(String input, Options options) {
+		LinkedHashMap<Character, Integer> map = new LinkedHashMap<>();
 		char[] matcher = new char[0];
 		
 		if (!options.doAll() && options.doLetters() && options.doNumbers()) {
@@ -50,7 +42,6 @@ public class TextAnalyser {
 			
 			if (map.containsKey(ch)) {
 				int val = map.get(ch);
-				System.out.println(ch + " / " + val);
 				map.put(ch, val + 1);	
 			} else {
 				if (options.doAll() 
@@ -62,6 +53,21 @@ public class TextAnalyser {
 		}
 		
 		return map;
+	}
+	
+	public static String removeDuplicates(String input) {
+	    boolean charFound[] = new boolean[256];
+	    StringBuilder sb = new StringBuilder(charFound.length);
+
+	    for (int i = 0; i < input.length(); i++) {
+	        char ch = input.charAt(i);
+	        if (!charFound[ch]) {
+	            charFound[ch] = true;
+	            sb.append(ch);
+	        }
+	    }
+
+	    return sb.toString();
 	}
 }
 
