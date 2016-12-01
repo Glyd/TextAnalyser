@@ -1,4 +1,4 @@
-package Assignment;
+package Assignment.TextAnalyser;
 
 import java.util.HashMap;
 
