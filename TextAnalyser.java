@@ -1,6 +1,6 @@
 package Assignment.TextAnalyser;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 public class TextAnalyser {
 	
@@ -11,12 +11,12 @@ public class TextAnalyser {
 	}
 	
 	public void analyse(String input, Options options) {
-		LinkedHashMap<Character,Integer> map = inputToHashmap(input, options);
+		HashMap<Character,Integer> map = inputToHashmap(input, options);
 		
 		buildGraph(map, removeDuplicates(input));
 	}
 	
-	private void buildGraph(LinkedHashMap<Character,Integer> map, String input) {
+	private void buildGraph(HashMap<Character,Integer> map, String input) {
 			for (int j = 0; j <input.length(); j++) { //for each letter in string
 				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
 					System.out.print(input.charAt(j) + " | ");
@@ -26,8 +26,8 @@ public class TextAnalyser {
 		}
 	}
 	
-	private LinkedHashMap<Character,Integer> inputToHashmap(String input, Options options) {
-		LinkedHashMap<Character, Integer> map = new LinkedHashMap<>();
+	private HashMap<Character,Integer> inputToHashmap(String input, Options options) {
+		HashMap<Character, Integer> map = new HashMap<>();
 		char[] matcher = new char[0];
 		
 		if (!options.doAll() && options.doLetters() && options.doNumbers()) {
