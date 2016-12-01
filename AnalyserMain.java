@@ -43,10 +43,11 @@ public class AnalyserMain {
 				if (scanner.next().toLowerCase().charAt(0) == 'y') 
 					specials = true;
 				
-				analyse.analyseOptions(input, letters, numbers, specials);
+				Options options = new Options(letters,numbers,specials);
+				
+				analyse.analyse(input, options);
 			}
 		}
-		
 	}
-
 }
+
