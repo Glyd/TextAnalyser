@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class TextAnalyser {
 	
 	Matchers matchers;
+	Analyser analyser;
 	
 	public TextAnalyser() {
 		matchers = new Matchers();
@@ -13,31 +14,12 @@ public class TextAnalyser {
 	public void analyse(String input, Options options) {
 		HashMap<Character,Integer> map = inputToHashmap(input, options);
 		
-		buildGraph(map, removeDuplicates(input));
-		printAnalysis(map,removeDuplicates(input));
+		analyser = new Analyser(map,removeDuplicates(input));
+		analyser.buildGraph();
+		analyser.countCharacters();
 	}
 	
-	private void buildGraph(HashMap<Character,Integer> map, String input) {
-		
-		for (int j = 0; j <input.length(); j++) { //for each letter in string
-				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
-					System.out.print(input.charAt(j) + " | ");
-					for (int h = 0; h < map.get(input.charAt(j)); h++) {
-						System.out.print("x");
-					}
-					System.out.println();
-				}
-		}
-	}
-	
-	private void printAnalysis(HashMap<Character,Integer> map, String input) {
-		
-		for (int j = 0; j <input.length(); j++) { //for each letter in string
-				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
-					System.out.println(input.charAt(j) + " was found " + map.get(input.charAt(j)) + " time(s).");
-				}
-		}
-	}
+
 	
 	private HashMap<Character,Integer> inputToHashmap(String input, Options options) {
 		HashMap<Character, Integer> map = new HashMap<>();
