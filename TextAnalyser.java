@@ -14,14 +14,27 @@ public class TextAnalyser {
 		HashMap<Character,Integer> map = inputToHashmap(input, options);
 		
 		buildGraph(map, removeDuplicates(input));
+		printAnalysis(map,removeDuplicates(input));
 	}
 	
 	private void buildGraph(HashMap<Character,Integer> map, String input) {
-			for (int j = 0; j <input.length(); j++) { //for each letter in string
+		
+		for (int j = 0; j <input.length(); j++) { //for each letter in string
 				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
 					System.out.print(input.charAt(j) + " | ");
-					System.out.print(map.get(input.charAt(j)));
+					for (int h = 0; h < map.get(input.charAt(j)); h++) {
+						System.out.print("x");
+					}
 					System.out.println();
+				}
+		}
+	}
+	
+	private void printAnalysis(HashMap<Character,Integer> map, String input) {
+		
+		for (int j = 0; j <input.length(); j++) { //for each letter in string
+				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
+					System.out.println(input.charAt(j) + " was found " + map.get(input.charAt(j)) + " time(s).");
 				}
 		}
 	}
