@@ -2,7 +2,8 @@ package Assignment.TextAnalyser;
 
 class Options {
 	
-	/*Simple class to handle choices*/
+	/*Handles the user's analysis choices */
+	
 	private boolean letters, numbers, specials, all;
 	
 	public Options(boolean letters, boolean numbers, boolean specials) {

@@ -59,7 +59,7 @@ public class Analyser {
 		String text = stream.toString();
 		stream.close();
 	  
-	  return text; //build a new string for encoded file content and encoding specified
+	  return text;
 	}
 	
 	public void countWords(String input) {

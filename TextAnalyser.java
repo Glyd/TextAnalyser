@@ -20,8 +20,6 @@ public class TextAnalyser {
 		analyser.countWords(input);
 	}
 	
-
-	
 	private HashMap<Character,Integer> inputToHashmap(String input, Options options) {
 		HashMap<Character, Integer> map = new HashMap<>();
 		char[] matcher = new char[0];
@@ -66,4 +64,3 @@ public class TextAnalyser {
 	    return sb.toString();
 	}
 }
-
