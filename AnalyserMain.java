@@ -43,7 +43,6 @@ public class AnalyserMain {
 				FilePicker filePicker;
 				filePicker = new FilePicker();
 				
-				
 				File file = filePicker.getFile();
 				System.out.println("Please choose a text file.");
 				
@@ -73,8 +72,6 @@ public class AnalyserMain {
 				
 				valid = true;
 			}
-			
-		
 		
 		return valid;
 	}
@@ -100,7 +97,7 @@ public class AnalyserMain {
 		} else {
 			Options options = new Options(letters,numbers,specials);
 			analyse.analyse(input, options);
-			System.out.println();
+			System.out.println();	
 		}
 	}
 }
