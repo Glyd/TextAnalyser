@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
+
+import org.omg.CORBA_2_3.portable.InputStream;
 
 public class Analyser {
 	
@@ -51,7 +54,26 @@ public class Analyser {
 	
 	public static String readFile(String path, Charset encoding) 
 			  throws IOException { //to catch file errors
-	  byte[] encoded = Files.readAllBytes(Paths.get(path));
-	  return new String(encoded, encoding); //build a new string for encoded file content and encoding specified
+	  
+		java.io.InputStream stream = Files.newInputStream(Paths.get(path), StandardOpenOption.READ);
+		String text = stream.toString();
+		stream.close();
+	  
+	  return text; //build a new string for encoded file content and encoding specified
+	}
+	
+	public void countWords(String input) {
+		String largestWord = "";
+		
+		String[] words = input.split("\\s+");
+		
+		for (int i = 0; i < words.length; i++) {
+			if (words[i].length() > largestWord.length()) {
+				largestWord = words[i];
+			}
+		}
+		
+		System.out.println("You entered: " + words.length + " words");
+		System.out.println("The longest word was " + largestWord +", which has " + largestWord.length() + " characters.");
 	}
 }

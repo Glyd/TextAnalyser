@@ -39,7 +39,12 @@ public class AnalyserMain {
 				analyse(input, scanner);
 			}
 			else if (choice.equals("2")) {
-				File file = new FilePicker().getFile();
+				
+				FilePicker filePicker;
+				filePicker = new FilePicker();
+				
+				
+				File file = filePicker.getFile();
 				System.out.println("Please choose a text file.");
 				
 				try {
@@ -60,23 +65,16 @@ public class AnalyserMain {
 		
 		boolean valid = false;
 		
-		switch(path) {
-		case ".txt":
-			valid = true;
-			break;
-		case ".doc":
-			valid = true;
-			break;
-		case ".docx":
-			valid = true;
-			break;
-		case ".sh":
-			valid = true;
-			break;
-		case ".rtf":
-			valid = true;
-			break;
-		}
+		if (path.endsWith(".txt") ||
+				path.endsWith(".rtf") ||
+				path.endsWith(".doc") ||
+				path.endsWith(".docx") ||
+				path.endsWith(".sh") ) {
+				
+				valid = true;
+			}
+			
+		
 		
 		return valid;
 	}
@@ -96,9 +94,14 @@ public class AnalyserMain {
 		if (scanner.next().toLowerCase().charAt(0) == 'y') 
 			specials = true;
 		
-		Options options = new Options(letters,numbers,specials);
-		
-		analyse.analyse(input, options);
+		if (!letters && !numbers && !specials) {
+			System.out.println("You denied all analysis options. Please select at least one.");
+			System.out.println();
+		} else {
+			Options options = new Options(letters,numbers,specials);
+			analyse.analyse(input, options);
+			System.out.println();
+		}
 	}
 }
 

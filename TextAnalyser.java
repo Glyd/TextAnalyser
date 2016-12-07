@@ -17,6 +17,7 @@ public class TextAnalyser {
 		analyser = new Analyser(map,removeDuplicates(input));
 		analyser.buildGraph();
 		analyser.countCharacters();
+		analyser.countWords(input);
 	}
 	
 
