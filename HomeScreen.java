@@ -100,7 +100,7 @@ public class HomeScreen {
 			public void mouseClicked(MouseEvent e) {
 				JFileChooser fileChooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
-		    	        "Text Files", "txt", "sh","rtf","doc","docx");
+		    	        "Text Files", "txt", "sh","rtf");
 				fileChooser.setFileFilter(filter);
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 				int result = fileChooser.showOpenDialog(frame);

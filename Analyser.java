@@ -88,13 +88,14 @@ public class Analyser {
 	
 	public StringBuilder countWords(String input) {
 		
-		input = input.replaceAll("[^A-Za-z]+", " "); //replace all non alphabet characters with blank space
+		input = input.replaceAll("[^A-Za-z]+", " "); //replace all non alphabet characters with spaces
 		StringBuilder builder = new StringBuilder();
 		String largestWord = "";
 		
 		String[] words = input.split("\\s+");
 		
-		for (int i = 0; i < words.length; i++) {
+		//check if each word is larger than the current largest
+		for (int i = 0; i < words.length; i++) { 
 			if (words[i].length() > largestWord.length()) {
 				largestWord = words[i];
 			}
@@ -112,7 +113,7 @@ public class Analyser {
 	private String removeDuplicates(String input) {
 	    boolean charFound[] = new boolean[256];
 	    StringBuilder sb = new StringBuilder(charFound.length);
-
+	    
 	    for (int i = 0; i < input.length(); i++) {
 	        char ch = input.charAt(i);
 	        if (!charFound[ch]) {
