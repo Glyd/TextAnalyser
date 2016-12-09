@@ -10,16 +10,20 @@ public class TextAnalyser {
 	public TextAnalyser() {
 		matchers = new Matchers();
 	}
-	
+
 	public void analyse(String input, Options options) {
 		HashMap<Character,Integer> map = inputToHashmap(input, options);
 		
-		analyser = new Analyser(map,removeDuplicates(input));
-		analyser.buildGraph();
-		analyser.countCharacters();
-		analyser.countWords(input);
+		StringBuilder builder = new StringBuilder();
+		
+		analyser = new Analyser(map,input);
+		builder.append(analyser.buildGraph());
+		builder.append(analyser.countCharacters());
+		builder.append(analyser.countWords(input));
+		
+		ResultsScreen screen = new ResultsScreen(builder.toString());
 	}
-	
+
 	private HashMap<Character,Integer> inputToHashmap(String input, Options options) {
 		HashMap<Character, Integer> map = new HashMap<>();
 		char[] matcher = new char[0];
@@ -47,20 +51,5 @@ public class TextAnalyser {
 		}
 		
 		return map;
-	}
-	
-	public static String removeDuplicates(String input) {
-	    boolean charFound[] = new boolean[256];
-	    StringBuilder sb = new StringBuilder(charFound.length);
-
-	    for (int i = 0; i < input.length(); i++) {
-	        char ch = input.charAt(i);
-	        if (!charFound[ch]) {
-	            charFound[ch] = true;
-	            sb.append(ch);
-	        }
-	    }
-
-	    return sb.toString();
 	}
 }

@@ -3,14 +3,14 @@ package Assignment.TextAnalyser;
 class Options {
 	
 	/*Handles the user's analysis choices */
-	
+
 	private boolean letters, numbers, specials, all;
-	
+
 	public Options(boolean letters, boolean numbers, boolean specials) {
 		setLetters(letters);
 		setNumbers(numbers);
 		setSpecials(specials);
-		
+
 		if (letters && numbers && specials) 
 			all = true;
 	}
@@ -42,5 +42,4 @@ class Options {
 	public boolean doAll() {
 		return all;
 	}
-	
 }

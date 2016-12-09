@@ -5,8 +5,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
+import org.omg.CORBA.Environment;
 import org.omg.CORBA_2_3.portable.InputStream;
 
 public class Analyser {
@@ -14,21 +16,35 @@ public class Analyser {
 	/**Initialize class with the map and input (removing any duplicate characters). */
 
 	HashMap<Character,Integer> map;
-	String input;
+	String input, wholeInput;
 	
 	public Analyser(HashMap<Character,Integer> map, String input) {
 		this.map = map;
-		this.input = input;
+		wholeInput = input;
+		this.input = removeDuplicates(input);
 	}
 	
-	public void countCharacters() {
+	public StringBuilder countCharacters() {
 		
 		int highestVal = 0;
 		char highestChar =' ';
+		StringBuilder builder = new StringBuilder();
 		
 		for (int j = 0; j <input.length(); j++) { //for each letter in string
 				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
-					System.out.println(input.charAt(j) + " was found " + map.get(input.charAt(j)) + " time(s).");
+					
+					
+					double relativeFreq = (double)map.get(input.charAt(j))/(double)wholeInput.length();
+					DecimalFormat df = new DecimalFormat("#.##");
+					relativeFreq = Double.parseDouble(df.format(relativeFreq));
+					System.out.println(map.get(input.charAt(j)) + "/" + wholeInput.length());
+					
+					// number of times that char occurs, number of unique characters, total characters
+					
+					builder.append(input.charAt(j) + " was found " + map.get(input.charAt(j)) + " time(s). Relative frequency: " 
+							+ relativeFreq);
+					builder.append(System.getProperty("line.separator")); //get newline, platform independent way
+					
 					if (map.get(input.charAt(j)) > highestVal) {
 						highestVal = map.get(input.charAt(j));
 						highestChar = input.charAt(j);
@@ -36,20 +52,29 @@ public class Analyser {
 				}
 		}
 		
-		System.out.println("The most commonly occuring character was " + highestChar + " with " + highestVal + " occurences.");
+		builder.append("The most commonly occuring character was " + highestChar + " with " + highestVal + " occurences.");
+		builder.append(System.getProperty("line.separator"));
+		
+		return builder;
 	}
 	
-	public void buildGraph() {
+	public StringBuilder buildGraph() {
+		
+		StringBuilder builder = new StringBuilder();
 		
 		for (int j = 0; j <input.length(); j++) { //for each letter in string
 				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
-					System.out.print(input.charAt(j) + " | ");
-					for (int h = 0; h < map.get(input.charAt(j)); h++) {
-						System.out.print("x");
+					StringBuilder values = new StringBuilder();
+					for (int h = 0; h < map.get(input.charAt(j))/input.length(); h++) {
+						values.append("x");
 					}
-					System.out.println();
+					
+					builder.append(input.charAt(j) + " | " + values.toString());
+					builder.append(System.getProperty("line.separator"));
 				}
 		}
+		
+		return builder;
 	}
 	
 	public static String readFile(String path, Charset encoding) 
@@ -62,7 +87,8 @@ public class Analyser {
 	  return text;
 	}
 	
-	public void countWords(String input) {
+	public StringBuilder countWords(String input) {
+		StringBuilder builder = new StringBuilder();
 		String largestWord = "";
 		
 		String[] words = input.split("\\s+");
@@ -73,7 +99,27 @@ public class Analyser {
 			}
 		}
 		
-		System.out.println("You entered: " + words.length + " words");
-		System.out.println("The longest word was " + largestWord +", which has " + largestWord.length() + " characters.");
+		builder.append("You entered: " + words.length + " words");
+		builder.append(System.getProperty("line.separator"));
+		builder.append("The longest word was " + largestWord +", which has " + largestWord.length() + " characters.");
+		builder.append(System.getProperty("line.separator"));
+		
+		return builder;
+	}
+	
+
+	private String removeDuplicates(String input) {
+	    boolean charFound[] = new boolean[256];
+	    StringBuilder sb = new StringBuilder(charFound.length);
+
+	    for (int i = 0; i < input.length(); i++) {
+	        char ch = input.charAt(i);
+	        if (!charFound[ch]) {
+	            charFound[ch] = true;
+	            sb.append(ch);
+	        }
+	    }
+
+	    return sb.toString();
 	}
 }
