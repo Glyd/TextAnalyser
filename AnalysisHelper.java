@@ -2,12 +2,12 @@ package Assignment.TextAnalyser;
 
 import java.util.HashMap;
 
-public class TextAnalyser {
+public class AnalysisHelper {
 	
 	Matchers matchers;
 	Analyser analyser;
 	
-	public TextAnalyser() {
+	public AnalysisHelper() {
 		matchers = new Matchers();
 	}
 

@@ -87,6 +87,8 @@ public class Analyser {
 	}
 	
 	public StringBuilder countWords(String input) {
+		
+		input = input.replaceAll("[^A-Za-z]+", " "); //replace all non alphabet characters with blank space
 		StringBuilder builder = new StringBuilder();
 		String largestWord = "";
 		

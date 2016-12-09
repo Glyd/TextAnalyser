@@ -110,7 +110,6 @@ public class HomeScreen {
 			    	try {
 						textArea.setText(new Scanner(selectedFile).useDelimiter("\\Z").next());
 					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
 						System.out.println("File was unavailable. Please try again.");
 					}
 				}
@@ -138,15 +137,15 @@ public class HomeScreen {
 		JButton analyseButton = new JButton("ANALYSE");
 		analyseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!lettersRadio.isSelected() && !numbersRadio.isSelected() && !specialsRadio.isSelected()) {
-					//TODO error message
+				if (!lettersRadio.isSelected() && !numbersRadio.isSelected() && !specialsRadio.isSelected() || textArea.getText().equals("")) {
+					ErrorWindow error = new ErrorWindow("Ensure you have selecting something to analyse, as well as at least one option.");
 				} else {
 					letters = lettersRadio.isSelected();
 					numbers = numbersRadio.isSelected();
 					specials = specialsRadio.isSelected();
 					
 					Options options = new Options(letters,numbers,specials);
-					TextAnalyser analyse = new TextAnalyser();
+					AnalysisHelper analyse = new AnalysisHelper();
 					analyse.analyse(textArea.getText().toLowerCase(), options);
 				}
 			}
