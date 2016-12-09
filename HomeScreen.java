@@ -161,6 +161,9 @@ public class HomeScreen {
 					if (!letters)
 						input = input.replaceAll("[A-Za-z]", "");
 					
+					if(specials)
+						input = input.replaceAll("[\n]", "");
+					
 					Options options = new Options(letters,numbers,specials);
 					AnalysisHelper analyse = new AnalysisHelper();
 					analyse.analyse(input.toLowerCase(), options);
