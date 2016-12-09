@@ -49,10 +49,10 @@ public class Analyser {
 					}
 				}
 		}
-		
+		builder.append(System.getProperty("line.separator"));
 		builder.append("The most commonly occuring character was " + highestChar + " with " + highestVal + " occurences.");
 		builder.append(System.getProperty("line.separator"));
-		
+		builder.append(System.getProperty("line.separator"));
 		return builder;
 	}
 	
@@ -73,6 +73,7 @@ public class Analyser {
 				}
 		}
 		
+		builder.append(System.getProperty("line.separator"));
 		return builder;
 	}
 	
@@ -100,10 +101,14 @@ public class Analyser {
 				largestWord = words[i];
 			}
 		}
-		
-		builder.append("You entered: " + words.length + " words");
+		if(largestWord.length()>0) {
+			builder.append("You entered: " + words.length + " words");
+			builder.append(System.getProperty("line.separator"));
+			builder.append(System.getProperty("line.separator"));
+			builder.append("The longest word was " + largestWord +", which has " + largestWord.length() + " characters.");
+		} else
+			builder.append("No words were found!");
 		builder.append(System.getProperty("line.separator"));
-		builder.append("The longest word was " + largestWord +", which has " + largestWord.length() + " characters.");
 		builder.append(System.getProperty("line.separator"));
 		
 		return builder;

@@ -144,9 +144,26 @@ public class HomeScreen {
 					numbers = numbersRadio.isSelected();
 					specials = specialsRadio.isSelected();
 					
+					String input = textArea.getText();
+					
+					if (!numbers)
+						input = input.replaceAll("[0-9]", "");
+					
+					if(!specials && letters && numbers) 
+						input = input.replaceAll("[^A-Za-z0-9]", "");
+					
+					if (!specials && letters && !numbers)
+						input = input.replaceAll("[^A-Za-z]", " ");
+					
+					if (!specials && !letters && numbers)
+						input = input.replaceAll("[^0-9]", "");
+					
+					if (!letters)
+						input = input.replaceAll("[A-Za-z]", "");
+					
 					Options options = new Options(letters,numbers,specials);
 					AnalysisHelper analyse = new AnalysisHelper();
-					analyse.analyse(textArea.getText().toLowerCase(), options);
+					analyse.analyse(input.toLowerCase(), options);
 				}
 			}
 		});
