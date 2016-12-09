@@ -33,11 +33,9 @@ public class Analyser {
 		for (int j = 0; j <input.length(); j++) { //for each letter in string
 				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
 					
-					
 					double relativeFreq = (double)map.get(input.charAt(j))/(double)wholeInput.length();
 					DecimalFormat df = new DecimalFormat("#.##");
 					relativeFreq = Double.parseDouble(df.format(relativeFreq));
-					System.out.println(map.get(input.charAt(j)) + "/" + wholeInput.length());
 					
 					// number of times that char occurs, number of unique characters, total characters
 					
@@ -65,7 +63,8 @@ public class Analyser {
 		for (int j = 0; j <input.length(); j++) { //for each letter in string
 				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
 					StringBuilder values = new StringBuilder();
-					for (int h = 0; h < map.get(input.charAt(j))/input.length(); h++) {
+					for (int h = 0; h < ((double)map.get(input.charAt(j))/(double)wholeInput.length())*100; h++) {
+						
 						values.append("x");
 					}
 					
