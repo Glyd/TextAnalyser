@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.DecimalFormat;
 import java.util.HashMap;
-
 import org.omg.CORBA.Environment;
 import org.omg.CORBA_2_3.portable.InputStream;
 
@@ -21,6 +20,7 @@ public class Analyser {
 	public Analyser(HashMap<Character,Integer> map, String input) {
 		this.map = map;
 		wholeInput = input;
+		
 		this.input = removeDuplicates(input);
 	}
 	
@@ -31,23 +31,36 @@ public class Analyser {
 		StringBuilder builder = new StringBuilder();
 		
 		for (int j = 0; j <input.length(); j++) { //for each letter in string
-				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
+				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1) != -1) {
 					
-					double relativeFreq = (double)map.get(input.charAt(j))/(double)wholeInput.length();
+					double relativeFreq = (double) map.get(input.charAt(j)) / (double) wholeInput.length();
 					DecimalFormat df = new DecimalFormat("#.##");
 					relativeFreq = Double.parseDouble(df.format(relativeFreq));
 					
 					// number of times that char occurs, number of unique characters, total characters
 					
-					builder.append(input.charAt(j) + " was found " + map.get(input.charAt(j)) + " time(s). Relative frequency: " 
-							+ relativeFreq);
+					if (input.charAt(j) == ' ')
+						builder.append('␣' + " was found " + map.get(input.charAt(j)) + " time(s). Relative frequency: " 
+								+ relativeFreq);
+					else if (input.charAt(j) == '\n')
+						builder.append("↵" + " was found " + map.get(input.charAt(j)) + " time(s). Relative frequency: " 
+								+ relativeFreq);
+					else
+						builder.append(input.charAt(j) + " was found " + map.get(input.charAt(j)) + " time(s). Relative frequency: " 
+								+ relativeFreq);
+					
 					builder.append(System.getProperty("line.separator")); //get newline, platform independent way
 					
 					if (map.get(input.charAt(j)) > highestVal) {
 						highestVal = map.get(input.charAt(j));
 						highestChar = input.charAt(j);
-					}
+						
+					if (highestChar == ' ')
+						highestChar = '␣';
+					else if (highestChar == '\n')
+						highestChar = '↵';
 				}
+			}
 		}
 		builder.append(System.getProperty("line.separator"));
 		builder.append("The most commonly occuring character was " + highestChar + " with " + highestVal + " occurences.");
@@ -61,30 +74,26 @@ public class Analyser {
 		StringBuilder builder = new StringBuilder();
 		
 		for (int j = 0; j <input.length(); j++) { //for each letter in string
-				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1)!= -1) {
+				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1) != -1) {
 					StringBuilder values = new StringBuilder();
-					for (int h = 0; h < ((double)map.get(input.charAt(j))/(double)wholeInput.length())*100; h++) {
+					for (int h = 0; h < ((double)map.get(input.charAt(j))/(double)wholeInput.length()) * 100; h++) {
 						
 						values.append("x");
 					}
 					
-					builder.append(input.charAt(j) + " | " + values.toString());
+					if (input.charAt(j) == ' ')
+						builder.append('␣' + " | " + values.toString());
+					else if  (input.charAt(j) == '\n')
+						builder.append("↵" + " | " + values.toString());
+					else
+						builder.append(input.charAt(j) + " | " + values.toString());
+						
 					builder.append(System.getProperty("line.separator"));
 				}
 		}
 		
 		builder.append(System.getProperty("line.separator"));
 		return builder;
-	}
-	
-	public static String readFile(String path, Charset encoding) 
-			  throws IOException { //to catch file errors
-	  
-		java.io.InputStream stream = Files.newInputStream(Paths.get(path), StandardOpenOption.READ);
-		String text = stream.toString();
-		stream.close();
-	  
-	  return text;
 	}
 	
 	public StringBuilder countWords(String input) {
@@ -102,10 +111,10 @@ public class Analyser {
 			}
 		}
 		if(largestWord.length()>0) {
-			builder.append("You entered: " + words.length + " words");
+			builder.append("You entered: " + words.length + " word(s)");
 			builder.append(System.getProperty("line.separator"));
 			builder.append(System.getProperty("line.separator"));
-			builder.append("The longest word was " + largestWord +", which has " + largestWord.length() + " characters.");
+			builder.append("The longest word was " + largestWord +", which has " + largestWord.length() + " character(s).");
 		} else
 			builder.append("No words were found!");
 		builder.append(System.getProperty("line.separator"));
@@ -120,9 +129,18 @@ public class Analyser {
 	    StringBuilder sb = new StringBuilder(charFound.length);
 	    
 	    for (int i = 0; i < input.length(); i++) {
-	        char ch = input.charAt(i);
-	        if (!charFound[ch]) {
-	            charFound[ch] = true;
+	    	
+	    	String ch;
+	    	
+	    	if (input.charAt(i) == '␣')
+	    		ch = " ";
+	    	else if (input.charAt(i) == '↵')
+	    		ch = System.getProperty("line.separator");
+	    	else 
+	    		ch = input.charAt(i)+"";
+	    	
+	        if (!charFound[ch.charAt(0)]) {
+	            charFound[ch.charAt(0)] = true;
 	            sb.append(ch);
 	        }
 	    }

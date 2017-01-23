@@ -40,6 +40,7 @@ public class AnalysisHelper {
 			
 			if (map.containsKey(ch)) {
 				int val = map.get(ch);
+				
 				map.put(ch, val + 1);	
 			} else {
 				if (options.doAll() 

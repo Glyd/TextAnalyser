@@ -37,18 +37,15 @@ public class ResultsScreen {
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),}));
-		
 		JTextArea textArea = new JTextArea();
 		JScrollPane scroll = new JScrollPane (textArea);
 		textArea.setText(text);
+		textArea.setEditable(false);
 		scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
 		scroll.setHorizontalScrollBarPolicy ( ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
 		scroll.setBounds(100, 100, 450, 300);
 		frame.getContentPane().add(scroll, "2, 2, fill, fill");
-
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		
 		frame.setVisible(true);
 	}
-
 }

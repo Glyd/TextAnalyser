@@ -147,22 +147,19 @@ public class HomeScreen {
 					String input = textArea.getText();
 					
 					if (!numbers)
-						input = input.replaceAll("[0-9]", "");
+						input = input.replaceAll("[0-9]", ""); //remove all numeric characters
 					
 					if(!specials && letters && numbers) 
-						input = input.replaceAll("[^A-Za-z0-9]", "");
+						input = input.replaceAll("[^A-Za-z0-9]", ""); //remove non alphanumeric
 					
-					if (!specials && letters && !numbers)
-						input = input.replaceAll("[^A-Za-z]", " ");
+					if (!specials && letters && !numbers) 
+						input = input.replaceAll("[^A-Za-z]", ""); //remove non alphabetic
 					
 					if (!specials && !letters && numbers)
-						input = input.replaceAll("[^0-9]", "");
+						input = input.replaceAll("[^0-9]", ""); //remove non numeric
 					
 					if (!letters)
-						input = input.replaceAll("[A-Za-z]", "");
-					
-					if(specials)
-						input = input.replaceAll("[\n]", "");
+						input = input.replaceAll("[A-Za-z]", ""); //remove alphabetic
 					
 					Options options = new Options(letters,numbers,specials);
 					AnalysisHelper analyse = new AnalysisHelper();
