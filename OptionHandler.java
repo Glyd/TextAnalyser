@@ -1,12 +1,12 @@
 package Assignment.TextAnalyser;
 
-class Options {
+class OptionHandler {
 	
 	/*Handles the user's analysis choices */
 
 	private boolean letters, numbers, specials, all;
 
-	public Options(boolean letters, boolean numbers, boolean specials) {
+	public OptionHandler(boolean letters, boolean numbers, boolean specials) {
 		setLetters(letters);
 		setNumbers(numbers);
 		setSpecials(specials);

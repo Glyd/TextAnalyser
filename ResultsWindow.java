@@ -13,14 +13,14 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
-public class ResultsScreen {
+public class ResultsWindow {
 
 	private JFrame frame;
 
 	/**
 	 * Create the application.
 	 */
-	public ResultsScreen(String text) {
+	public ResultsWindow(String text) {
 		initialize(text);
 	}
 

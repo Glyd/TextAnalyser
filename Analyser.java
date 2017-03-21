@@ -77,7 +77,6 @@ public class Analyser {
 				if(!input.equals(null) && map.getOrDefault(input.charAt(j), -1) != -1) {
 					StringBuilder values = new StringBuilder();
 					for (int h = 0; h < ((double)map.get(input.charAt(j))/(double)wholeInput.length()) * 100; h++) {
-						
 						values.append("x");
 					}
 					

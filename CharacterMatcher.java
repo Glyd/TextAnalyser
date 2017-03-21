@@ -1,6 +1,6 @@
 package Assignment.TextAnalyser;
 
-public class Matchers {
+public class CharacterMatcher {
 	
 	char alphabet[] = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r',
 			's','t','u','v','w','x','y','z'};
@@ -9,7 +9,7 @@ public class Matchers {
 	
 	char[] alphanumeric = new char[37];
 	
-	public Matchers() {
+	public CharacterMatcher() {
 		String x = "";
 		StringBuilder stringBuilder = new StringBuilder();
 		x = stringBuilder.append(alphabet).append(numeric).toString(); //append arrays when analysing alphanumeric
