@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+/**
+ * A screen to select which elements you wish to analyse. 
+ */
 public class ElementSelector {
 
 	private JFrame frame;
@@ -96,7 +99,7 @@ public class ElementSelector {
 				} else {
 					elements = new Elements();
 				}
-				AnalysisHelper analyse = new AnalysisHelper();
+				AnalyserHelper analyse = new AnalyserHelper();
 				try {
 					if (elements.hasChosen()){
 						analyse.analyseURL(url, elements);

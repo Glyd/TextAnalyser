@@ -27,7 +27,9 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.UIManager;
-
+/**
+ * The main screen of the application containing the text box, analysis options, button for URL analysis and file browser.
+ */
 public class HomeWindow {
 
 	private JFrame frame;
@@ -178,7 +180,7 @@ public class HomeWindow {
 						input = input.replaceAll("[A-Za-z]", ""); //remove alphabetic
 					
 					OptionHandler options = new OptionHandler(letters,numbers,specials);
-					AnalysisHelper analyse = new AnalysisHelper();
+					AnalyserHelper analyse = new AnalyserHelper();
 					analyse.analyse(input.toLowerCase(), options);
 				}
 			}
