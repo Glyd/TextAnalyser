@@ -1,5 +1,8 @@
 package Assignment.TextAnalyser;
 
+/**
+ * A class to detect whether a character should be analysed, and if it is special. 
+ */
 public class CharacterMatcher {
 	
 	char alphabet[] = new char[]{ 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r',

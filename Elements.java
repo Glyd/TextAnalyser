@@ -1,6 +1,6 @@
 package Assignment.TextAnalyser;
 
-/*
+/**
  * A simple class to store Element selection options.
  */
 public class Elements {

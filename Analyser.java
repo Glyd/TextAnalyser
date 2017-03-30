@@ -82,9 +82,8 @@ public class Analyser {
 	}
 	
 	/**
-	 * Creates an object of the Analyser class.
-	 * @param  map  A HashMap containing all characters and the times they were found. 
-	 * @param  input  The String object you want analyse.
+	 * Builds a graph based on the characters found and the number of occurrences as a percentage.
+	 * @return A multi-line graph as a StringBuilder ready to print. 
 	 */
 	public StringBuilder buildGraph() {
 		
